@@ -1,0 +1,10 @@
+[lint]
+select = ["E", "F", "W", "I"]
+ignore = []
+
+[lint.isort]
+known-first-party = []
+
+[format]
+indent-style = "tab"
+quote-style = "double"
