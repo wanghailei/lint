@@ -1,6 +1,9 @@
 # BOS RuboCop baseline.
 # YAML must use spaces; Ruby source files use tabs by project rule.
 
+require:
+  - rubocop-performance
+
 AllCops:
   TargetRubyVersion: 4.0 # Parse and lint as Ruby 4.0.
   NewCops: enable # Automatically adopt new cops unless overridden below.
@@ -13,6 +16,8 @@ AllCops:
     - "node_modules/**/*"
     - "tmp/**/*"
     - "vendor/**/*"
+
+# ── Layout ────────────────────────────────────────────────────────────
 
 Layout/IndentationStyle:
   EnforcedStyle: tabs # Enforce tab indentation in Ruby files.
@@ -78,6 +83,11 @@ Layout/SpaceInsideHashLiteralBraces:
 Layout/SpaceInsidePercentLiteralDelimiters:
   Enabled: false # Allow `%w[ a b ]` / `%i[ a b ]` spacing.
 
+Layout/LineLength:
+  Max: 218 # Preserve existing one-line view/helper patterns.
+
+# ── Style ─────────────────────────────────────────────────────────────
+
 Style/MethodDefParentheses:
   EnforcedStyle: require_parentheses # Always use parentheses in `def` with params.
 
@@ -119,6 +129,20 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   Enabled: false # Do not enforce quote style inside interpolation blocks.
 
+Style/IfInsideElse:
+  Enabled: false # Prefer guard clauses or case/when over elsif.
+
+Style/IfUnlessModifier:
+  Enabled: false # Keep if/unless blocks explicit; do not force one-liners.
+
+Style/NumericPredicate:
+  Enabled: false # Allow both `.zero?` and `== 0`; context-dependent.
+
+Style/AccessorGrouping:
+  Enabled: false # Allow separate attr lines for readability.
+
+# ── Metrics ───────────────────────────────────────────────────────────
+
 Metrics/AbcSize:
   Max: 70 # Allow larger business methods before forcing extraction.
 
@@ -142,6 +166,3 @@ Metrics/ParameterLists:
 
 Metrics/PerceivedComplexity:
   Max: 24 # Permit pragmatic branching depth in orchestration methods.
-
-Layout/LineLength:
-  Max: 218 # Preserve existing one-line view/helper patterns.
